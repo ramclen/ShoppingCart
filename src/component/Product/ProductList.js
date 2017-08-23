@@ -1,5 +1,5 @@
 import React from 'react'
-import ProductRow from "./ProductRow";
+import Product from "../../redux/ProductContainer";
 
 export default class ProductList extends React.Component{
     constructor(){
@@ -9,7 +9,7 @@ export default class ProductList extends React.Component{
     _toProductRowList(products){
         var productRows = []
         products.forEach((product, index)=>{
-            productRows.push(<li key={index}><ProductRow product={product} /> </li>);
+            productRows.push(<li key={index}><Product product={product} /> </li>);
         })
         return productRows;
     }

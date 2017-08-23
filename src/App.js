@@ -3,7 +3,7 @@ import {  BrowserRouter as Router, Route } from 'react-router-dom'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import YourComponent from "./component/YourComponent";
 import Link from "react-router-dom/es/Link";
-import AddableProductList from "./component/Product/AddableProductList";
+import ProductList from "./redux/ProductListContainer";
 
 export default class App extends React.Component{
     constructor(props){
@@ -16,7 +16,7 @@ export default class App extends React.Component{
                 <div>
                     <Router>
                         <div>
-                            <Route exact path="/" component={AddableProductList} />
+                            <Route exact path="/" component={ProductList} />
                             <Route path="/other/:id" component={YourComponent} />
                         </div>
                     </Router>

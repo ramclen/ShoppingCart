@@ -7,20 +7,11 @@ export default class AddableProductList extends React.Component {
 
     constructor(){
         super();
-        this.state = {products : [
-            {id:0, name:"Milk", checked:false},
-            {id:1, name:"Bread", checked:true},
-            {id:2, name:"Water", checked:false},
-        ]}
-    }
-
-    onAdd(product){
-        product.id = this.getNextID();
-        this.setState({products: this.state.products.concat([product])});
+        console.log(this);
     }
 
     getNextID() {
-        return this.state.products.reduce((biggest, product) => {
+        return this.props.products.reduce((biggest, product) => {
             return (product.id < biggest) ? biggest : product.id;
         }, 0);
     }
@@ -29,8 +20,8 @@ export default class AddableProductList extends React.Component {
         return(
             <div>
                 <h2>List</h2>
-                <AddProductBar onAdd={this.onAdd.bind(this)}/>
-                <ProductList products={this.state.products}/>
+                <AddProductBar onAdd={this.props.onAdd}/>
+                <ProductList products={this.props.products}/>
             </div>
         )
     }
