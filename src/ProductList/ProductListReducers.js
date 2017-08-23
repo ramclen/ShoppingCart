@@ -2,14 +2,12 @@ import { combineReducers } from 'redux'
 import {
     ADD_PRODUCT,
     TOGGLE_PRODUCT
-} from './actions'
-
-
+} from './ProductListActions'
 
 function addProducts(state, action) {
     return [
         ...state,
-        action.product
+        {id:action.id, name:action.name, checked:false}
     ]
 }
 
@@ -25,12 +23,13 @@ function toggleProduct(state, action) {
 
 const PRODUCTS_REDUCER_ACTION = {
     [ADD_PRODUCT]: addProducts,
-    [TOGGLE_PRODUCT]: toggleProduct
+    [TOGGLE_PRODUCT]: toggleProduct,
+    ["DEFAULT"] : state=>state
 };
 
 let findReducer = function (state=[], action={type:""}) {
     if(!PRODUCTS_REDUCER_ACTION[action.type])
-        return state
+        return PRODUCTS_REDUCER_ACTION["DEFAULT"](state, action)
 
     return PRODUCTS_REDUCER_ACTION[action.type](state, action);
 };

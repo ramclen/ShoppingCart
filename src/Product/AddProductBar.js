@@ -6,8 +6,7 @@ export default class AddProductBar extends React.Component {
     }
 
     add(){
-        var product = {id:0, name:this._name.value, checked:true};
-        this.props.onAdd(product)
+        this.props.onAdd(this._name.value)
     }
 
 

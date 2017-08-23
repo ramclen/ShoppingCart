@@ -1,5 +1,5 @@
 import { createStore } from 'redux';
-import ShoppingCartApp from './reducers';
+import ShoppingCartApp from '../ProductList/ProductListReducers';
 
 
 var initState = {

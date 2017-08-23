@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
-import {toggleProduct} from "./actions";
-import ProductRow from "../component/Product/ProductRow";
+import {toggleProduct} from "../ProductList/ProductListActions";
+import ProductRow from "./ProductRow";
 
 const mapDispatchToProps = dispatch => {
     return {
@@ -11,7 +11,7 @@ const mapDispatchToProps = dispatch => {
 }
 
 const Product = connect(
-    ()=>{ return {}},
+    undefined,
     mapDispatchToProps
 )(ProductRow)
 

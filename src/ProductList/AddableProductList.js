@@ -1,5 +1,5 @@
 import React from "react";
-import AddProductBar from "./AddProductBar";
+import AddProductBar from "../Product/AddProductBar";
 import ProductList from "./ProductList";
 
 
@@ -7,7 +7,6 @@ export default class AddableProductList extends React.Component {
 
     constructor(){
         super();
-        console.log(this);
     }
 
     getNextID() {
