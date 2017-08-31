@@ -1,21 +1,20 @@
-import GSpreadSheets from "../GSpreadSheets";
-
 /*
  * action types
  */
+
+import ProductListApi from "./ProductListApi";
 
 export const ADD_PRODUCT = 'ADD_PRODUCT';
 export const TOGGLE_PRODUCT = 'TOGGLE_PRODUCT';
 export const RECEIVE_PRODUCTS = 'RECEIVE_PRODUCTS';
 export const REQUEST_PRODUCTS = 'REQUEST_PRODUCTS';
 export const POST_PRODUCT = 'POST_PRODUCTS';
-var spreadSheet = GSpreadSheets.instance();
-
+let productListApi = new ProductListApi();
 /*
  * action creators
  */
 //TODO Change it
-let nextID = 987;
+let nextID = 0;
 
 
 function postProduct() {
@@ -41,13 +40,7 @@ export function toggleProduct(productID) {
 export function fetchProducts() {
     return dispatch => {
         dispatch(requestProducts());
-        return spreadSheet.getDataFrom("page", "A2:E")
-            .then(result => result.values)
-            .then(values => values.map(
-                ([id, name, checked]) => {
-                    return {id:id-0, name, checked:checked==="TRUE"}
-                }
-            ))
+        return productListApi.getAll()
             .then((products)=> {
                 nextID = getNextID(products);
                 dispatch(receiveProducts(products));
@@ -56,13 +49,21 @@ export function fetchProducts() {
 }
 
 export function createProduct(name) {
-    var product = {id: nextID++, name, checked:false}
     return dispatch =>{
         dispatch(postProduct());
-        return spreadSheet.addRow("page", "A2:E", [product.id, product.name, product.checked?"TRUE":"FALSE"])
+        return productListApi.add({id: nextID++, name, checked:false})
             .then(()=>{
                 dispatch(fetchProducts())
             })
+    }
+}
+
+export function updateProduct(product) {
+    return dispatch =>{
+        return productListApi.update(product)
+            .then(() => {
+                dispatch(fetchProducts());
+            });
     }
 }
 
