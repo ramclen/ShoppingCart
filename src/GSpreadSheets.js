@@ -2,7 +2,7 @@ import gapi from "gapi";
 
 const DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
     CLIENT_ID =  '857380663582-skmqomclf391tgrfqbd9a353253p3lda.apps.googleusercontent.com',
-    SCOPES = "https://www.googleapis.com/auth/spreadsheets.readonly";
+    SCOPES = "https://www.googleapis.com/auth/drive";
 
 
 let _singleton = Symbol();
@@ -54,11 +54,12 @@ export default class GSpreadSheets {
         gapi.auth2.getAuthInstance().signOut();
     }
 
-    addRow(row){
+    addRow(page, range, row){
         return gapi.client.sheets.spreadsheets.values.append({
             range: this._createRange(page, range),
             spreadsheetId: this.spreadSheetID,
-            updates : row,
+            valueInputOption:"RAW",
+            resource : {values:[row]},
         })
     }
 

@@ -3,7 +3,7 @@ import {
     ADD_PRODUCT,
     TOGGLE_PRODUCT,
     REQUEST_PRODUCTS,
-    RECEIVE_PRODUCTS
+    RECEIVE_PRODUCTS, POST_PRODUCT
 } from './ProductListActions'
 
 function addProducts(state, action) {
@@ -27,11 +27,16 @@ function requestProduct(state, action){
     return  [...state];
 }
 
+function postProduct(state, action){
+    return  [...state];
+}
+
 function receiveProduct(state, action){
     return action.products;
 }
 
 const PRODUCTS_REDUCER_ACTION = {
+    [POST_PRODUCT]: postProduct,
     [ADD_PRODUCT]: addProducts,
     [TOGGLE_PRODUCT]: toggleProduct,
     [REQUEST_PRODUCTS]: requestProduct,
