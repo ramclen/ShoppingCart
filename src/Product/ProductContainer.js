@@ -1,11 +1,12 @@
 import {connect} from "react-redux";
-import {toggleProduct} from "../ProductList/ProductListActions";
+import {toggleProduct, updateProduct} from "../ProductList/ProductListActions";
 import ProductRow from "./ProductRow";
 
 const mapDispatchToProps = dispatch => {
     return {
-        toggleProduct: productID => {
-            dispatch(toggleProduct(productID))
+        toggleProduct: product => {
+            product.checked = !product.checked;
+            dispatch(updateProduct(product))
         }
     }
 }

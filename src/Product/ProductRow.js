@@ -3,7 +3,7 @@ import React from 'react'
 export default class ProductRow extends React.Component{
 
     change() {
-        this.props.toggleProduct(this.props.product.id)
+        this.props.toggleProduct(this.props.product)
     }
 
     render(){
