@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux'
 import {
     ADD_PRODUCT,
-    TOGGLE_PRODUCT
+    TOGGLE_PRODUCT,
+    REQUEST_PRODUCTS,
+    RECEIVE_PRODUCTS
 } from './ProductListActions'
 
 function addProducts(state, action) {
@@ -21,9 +23,19 @@ function toggleProduct(state, action) {
         });
 }
 
+function requestProduct(state, action){
+    return  [...state];
+}
+
+function receiveProduct(state, action){
+    return action.products;
+}
+
 const PRODUCTS_REDUCER_ACTION = {
     [ADD_PRODUCT]: addProducts,
     [TOGGLE_PRODUCT]: toggleProduct,
+    [REQUEST_PRODUCTS]: requestProduct,
+    [RECEIVE_PRODUCTS]: receiveProduct,
     ["DEFAULT"] : state=>state
 };
 
