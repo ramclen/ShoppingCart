@@ -1,5 +1,6 @@
 import React from 'react'
 import Product from "../Product/ProductContainer";
+import {List, Paper} from "material-ui";
 
 export default class ProductList extends React.Component{
     constructor(){
@@ -9,16 +10,18 @@ export default class ProductList extends React.Component{
     _toProductRowList(products){
         var productRows = []
         products.forEach((product, index)=>{
-            productRows.push(<li key={index}><Product product={product} /> </li>);
+            productRows.push(<Product key={index} product={product} />);
         })
         return productRows;
     }
 
     render(){
         return (
-            <ol>
-                {this._toProductRowList(this.props.products)}
-            </ol>
+            <Paper style={{maxHeight: "72vh", overflow: 'auto'}}>
+                <List >
+                    {this._toProductRowList(this.props.products)}
+                </List>
+            </Paper>
         )
     }
 }

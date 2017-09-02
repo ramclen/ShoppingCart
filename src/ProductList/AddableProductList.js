@@ -18,9 +18,8 @@ export default class AddableProductList extends React.Component {
     render(){
         return(
             <div>
-                <h2>List</h2>
-                <AddProductBar onAdd={this.props.onAdd}/>
                 <ProductList products={this.props.products}/>
+                <AddProductBar onAdd={this.props.onAdd}/>
             </div>
         )
     }

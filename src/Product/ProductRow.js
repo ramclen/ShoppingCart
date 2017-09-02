@@ -1,4 +1,5 @@
 import React from 'react'
+import {Checkbox, ListItem} from "material-ui";
 
 export default class ProductRow extends React.Component{
 
@@ -8,13 +9,9 @@ export default class ProductRow extends React.Component{
 
     render(){
         return (
-            <div>
-                <p>{this.props.product.name}</p>
-                <input type="checkbox"
-                       checked={this.props.product.checked}
-                       onChange={this.change.bind(this)}
-                />
-            </div>
+            <ListItem
+                leftCheckbox={<Checkbox checked={this.props.product.checked} onCheck={this.change.bind(this)}/>}
+                primaryText={this.props.product.name} />
         )
     }
 }
