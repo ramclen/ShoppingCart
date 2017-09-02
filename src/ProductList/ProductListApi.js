@@ -21,7 +21,9 @@ export default class ProductListApi{
         return this.spreadSheet.updateRow("page", `A${product.id+1}:C${product.id+1}`, row)
     }
 
-
+    updateList(products){
+        //TODO
+    }
 
     _rowToProduct([id, name, checked]){
         return {id:id-0, name, checked:checked==="TRUE"}
