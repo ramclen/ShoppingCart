@@ -1,6 +1,7 @@
 import React from "react";
 import AddProductBar from "../Product/AddProductBar";
 import ProductList from "./ProductList";
+import {fetchProducts} from "./ProductListActions";
 
 
 export default class AddableProductList extends React.Component {
@@ -9,10 +10,8 @@ export default class AddableProductList extends React.Component {
         super();
     }
 
-    getNextID() {
-        return this.props.products.reduce((biggest, product) => {
-            return (product.id < biggest) ? biggest : product.id;
-        }, 0);
+    componentDidMount(){
+        this.props.getProducts();
     }
 
     render(){

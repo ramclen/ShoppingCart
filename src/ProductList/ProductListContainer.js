@@ -1,5 +1,5 @@
 import {connect} from "react-redux";
-import {addProduct, createProduct} from "./ProductListActions";
+import {addProduct, createProduct, fetchProducts} from "./ProductListActions";
 import AddableProductList from "./AddableProductList";
 
 const mapStateToProps = state => {
@@ -11,7 +11,10 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onAdd: product => {
-            dispatch(createProduct(product))
+            dispatch(createProduct(product));
+        },
+        getProducts: ()=>{
+            dispatch(fetchProducts());
         }
     }
 }

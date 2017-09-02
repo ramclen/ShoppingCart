@@ -1,7 +1,7 @@
 import React from 'react';
 import {  BrowserRouter as Router, Route } from 'react-router-dom'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import YourComponent from "./YourComponent";
+import UserInformationComponent from "../User/UserInformationComponent";
 import ProductList from "../ProductList/ProductListContainer";
 import {AppBar} from "material-ui";
 
@@ -20,8 +20,8 @@ export default class App extends React.Component {
                     />
                     <Router>
                         <div>
-                            <Route exact path="/" component={ProductList}/>
-                            <Route path="/other/:id" component={YourComponent}/>
+                            <Route exact path="/" component={UserInformationComponent}/>
+                            <Route  path="/Products" component={ProductList}/>
                         </div>
                     </Router>
                 </div>
