@@ -28,8 +28,8 @@ export default class UserInformationComponent extends React.Component{
 
     render(){
         return (
-            <Paper zDepth={3} style={{padding:"20px 0", textAlign:"center", width:"500px", height:"200px",position: "absolute",top:0,bottom: 0,left: 0,right: 0,margin: "auto"}}>
-                <div>
+            <Paper zDepth={3} style={{padding:"20px 0", textAlign:"center", width:"100%", height:"fit-content",position: "absolute",top:0,bottom: 0,left: 0,right: 0,margin: "auto"}}>
+                <div style={{overflow:"hidden"}}>
                     <img src={'http://www.learnersdictionary.com/media/ld/images/legacy_print_images/basket.gif'} alt="main"/>
                 </div>
                 <TextField floatingLabelText={"Your Drive ID"} value={this.state.spreadSheet} onChange={this.setSpreadSheetChange.bind(this)} type="text"/>
