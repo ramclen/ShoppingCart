@@ -16,6 +16,9 @@ module.exports = {
         path: path.resolve(__dirname, './dist'),
         publicPath : "/"
     },
+    externals: {
+        gapi : 'gapi'
+    },
     module: {
         loaders: [
             { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
