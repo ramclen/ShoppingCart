@@ -18,11 +18,36 @@ export default class ProductListApi{
 
     update(product){
         let row = [product.id, product.name, product.checked?"TRUE":"FALSE"];
-        return this.spreadSheet.updateRow("page", `A${product.id+1}:C${product.id+1}`, row)
+        return this.spreadSheet.updateRows("page", `A${product.id+1}:C${product.id+1}`, [row])
     }
 
-    updateList(products){
-        //TODO
+    remove(product){
+        return this.getAll()
+            .then(products => {
+                products.splice(products.findIndex(_product => _product.id == product.id), 1);
+                return products;
+            })
+            .then(products=>{
+                return products.map((_product, index)=>{
+                    _product.id = index+1;
+                    return _product;
+                })
+            })
+            .then(products => {
+                products[products.length] = undefined;
+                return this.updateList(products, [products[0].id + 1, products[products.length - 2].id + 2]);
+            })
+    }
+
+    updateList(products, customRange){
+        let rows = products.map(product => product?this._productToRow(product):['','','']);
+        return this.spreadSheet.updateRows("page", this._makeRange(customRange, products), rows);
+    }
+
+    _makeRange(products, customRange) {
+        if (customRange)
+            return `A${customRange[0]}:C${customRange[1]}`;
+        return `A${products[0].id + 1}:C${products[products.length - 1].id + 1}`;
     }
 
     _rowToProduct([id, name, checked]){

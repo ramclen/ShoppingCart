@@ -5,6 +5,7 @@
 import ProductListApi from "./ProductListApi";
 
 export const ADD_PRODUCT = 'ADD_PRODUCT';
+export const REMOVE_PRODUCT = 'REMOVE_PRODUCT';
 export const TOGGLE_PRODUCT = 'TOGGLE_PRODUCT';
 export const RECEIVE_PRODUCTS = 'RECEIVE_PRODUCTS';
 export const REQUEST_PRODUCTS = 'REQUEST_PRODUCTS';
@@ -23,6 +24,11 @@ function postProduct() {
 
 export function addProduct(name) {
     return {type: ADD_PRODUCT, id:nextID++, name};
+}
+
+export function requestRemoveProduct(product) {
+    nextID--;
+    return {type: REMOVE_PRODUCT, id:product.id};
 }
 
 export function receiveProducts(products) {
@@ -61,6 +67,15 @@ export function createProduct(name) {
 export function updateProduct(product) {
     return dispatch =>{
         return productListApi.update(product)
+            .then(() => {
+                dispatch(fetchProducts());
+            });
+    }
+}
+
+export function removeProduct(product) {
+    return dispatch =>{
+        return productListApi.remove(product)
             .then(() => {
                 dispatch(fetchProducts());
             });

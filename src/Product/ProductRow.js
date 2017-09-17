@@ -9,7 +9,7 @@ export default class ProductRow extends React.Component{
     }
 
     remove(){
-        //TODO
+        this.props.removeProduct(this.props.product);
     }
 
     render(){

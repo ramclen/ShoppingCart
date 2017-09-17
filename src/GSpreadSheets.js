@@ -63,12 +63,12 @@ export default class GSpreadSheets {
         })
     }
 
-    updateRow(page, range, row){
+    updateRows(page, range, rows){
         return gapi.client.sheets.spreadsheets.values.update({
             range: this._createRange(page, range),
             spreadsheetId: this.spreadSheetID,
             valueInputOption:"RAW",
-            resource : {values:[row]},
+            resource : {values:rows},
         })
     }
 

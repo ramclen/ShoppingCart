@@ -25,7 +25,8 @@ export default class AddProductBar extends React.Component {
                     value={this.state.name}
                     onChange={this.onTextChange.bind(this)}
                 />
-                <FloatingActionButton style={{position:"absolute", bottom:"15px", right:"10px"}} mini={true} secondary={true}  onClick={this.add.bind(this)}>
+                <FloatingActionButton style={{position:"absolute", bottom:"15px", right:"10px"}}
+                                      mini={true} secondary={true}  onClick={this.add.bind(this)}>
                     <ContentAdd />
                 </FloatingActionButton>
             </div>
