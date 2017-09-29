@@ -1,6 +1,8 @@
 var path = require('path');
 var webpack = require('webpack');
+var OfflinePlugin = require('offline-plugin');
 var WriteFilePlugin = require('write-file-webpack-plugin');
+
 console.log("bundle will be deployed on: " + path.resolve(__dirname, 'dist'));
 
 module.exports = {
@@ -32,7 +34,22 @@ module.exports = {
     },
     plugins:[
         new webpack.NamedModulesPlugin(),
-        new WriteFilePlugin()
+        new WriteFilePlugin(),
+        new OfflinePlugin({
+            safeToUseOptionalCaches: true,
+            externals :[
+                'style.css',
+                'dist/main.js',
+                '/',
+            ],
+            ServiceWorker: {
+                events: true,
+                navigateFallbackURL: '/'
+            },
+            AppCache: {
+                events: true
+            }
+        })
     ],
     devServer: {
         hot:true,

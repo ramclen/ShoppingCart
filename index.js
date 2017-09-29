@@ -5,6 +5,8 @@ import App from "./src/App/App";
 import { Provider } from 'react-redux'
 import store from "./src/App/AppStore"
 import injectTapEventPlugin from 'react-tap-event-plugin';
+
+require('offline-plugin/runtime').install();
 injectTapEventPlugin();
 
 const rootEl = document.getElementById('container');
