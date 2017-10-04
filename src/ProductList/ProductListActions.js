@@ -1,16 +1,20 @@
 /*
  * action types
  */
-
 import ProductListApi from "./ProductListApi";
+import OfflineRequestQueue from "../OfflineRequestQueue";
 
 export const ADD_PRODUCT = 'ADD_PRODUCT';
 export const REMOVE_PRODUCT = 'REMOVE_PRODUCT';
-export const TOGGLE_PRODUCT = 'TOGGLE_PRODUCT';
+export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
+export const UPDATE_PRODUCTS = 'UPDATE_PRODUCTS';
 export const RECEIVE_PRODUCTS = 'RECEIVE_PRODUCTS';
 export const REQUEST_PRODUCTS = 'REQUEST_PRODUCTS';
 export const POST_PRODUCT = 'POST_PRODUCTS';
+
 let productListApi = new ProductListApi();
+let queue : OfflineRequestQueue = new OfflineRequestQueue(3000);
+queue.run();
 /*
  * action creators
  */
@@ -39,8 +43,8 @@ export function requestProducts() {
     return {type:REQUEST_PRODUCTS}
 }
 
-export function toggleProduct(productID) {
-    return { type: TOGGLE_PRODUCT, productID}
+export function requestUpdateProduct(product) {
+    return { type: UPDATE_PRODUCT, product}
 }
 
 export function fetchProducts() {
@@ -65,10 +69,14 @@ export function createProduct(name) {
 }
 
 export function updateProduct(product) {
-    return dispatch =>{
+    return (dispatch, getState) =>{
+        dispatch(requestUpdateProduct(product));
         return productListApi.update(product)
             .then(() => {
-                dispatch(fetchProducts());
+                return dispatch(fetchProducts());
+            },()=>{
+                console.error("Connection fail, add request to queue");
+                queue.addRequest(UPDATE_PRODUCTS, ()=>updateProducts(getState))
             });
     }
 }
@@ -80,6 +88,10 @@ export function removeProduct(product) {
                 dispatch(fetchProducts());
             });
     }
+}
+
+function updateProducts(getState) {
+    return productListApi.updateList(getState().products);
 }
 
 let getNextID = function (products) {

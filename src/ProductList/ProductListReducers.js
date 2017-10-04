@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 import {
     ADD_PRODUCT,
-    TOGGLE_PRODUCT,
+    UPDATE_PRODUCT,
     REQUEST_PRODUCTS,
     RECEIVE_PRODUCTS, POST_PRODUCT
 } from './ProductListActions'
@@ -13,11 +13,12 @@ function addProducts(state, action) {
     ]
 }
 
-function toggleProduct(state, action) {
+function updateProduct(state, action) {
     return  state.map(product=>{
-            if(product.id == action.productID)
+            if(product.id == action.product.id)
                 return Object.assign({}, product, {
-                    checked : !product.checked
+                    name : product.name,
+                    checked : product.checked
                 });
             return product;
         });
@@ -38,7 +39,7 @@ function receiveProduct(state, action){
 const PRODUCTS_REDUCER_ACTION = {
     [POST_PRODUCT]: postProduct,
     [ADD_PRODUCT]: addProducts,
-    [TOGGLE_PRODUCT]: toggleProduct,
+    [UPDATE_PRODUCT]: updateProduct,
     [REQUEST_PRODUCTS]: requestProduct,
     [RECEIVE_PRODUCTS]: receiveProduct,
     ["DEFAULT"] : state=>state

@@ -44,7 +44,7 @@ export default class ProductListApi{
         return this.spreadSheet.updateRows("page", this._makeRange(customRange, products), rows);
     }
 
-    _makeRange(products, customRange) {
+    _makeRange(customRange, products) {
         if (customRange)
             return `A${customRange[0]}:C${customRange[1]}`;
         return `A${products[0].id + 1}:C${products[products.length - 1].id + 1}`;
